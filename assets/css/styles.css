@@ -84,82 +84,93 @@
 
 /* Print Styles */
 @page {
-    size: 80mm auto;
-    /* Standard Thermal Roll Size */
-    margin: 0;
+    size: auto;
+    margin: 10mm;
 }
 
 @media print {
+
+    /* Hide everything by default */
     body * {
-        visibility: hidden;
+        display: none !important;
     }
 
+    /* Show only the receipt modal and its children */
     #receipt-modal,
-    #receipt-modal * {
-        visibility: visible;
-    }
-
-    #receipt-modal {
-        position: absolute;
-        left: 0;
-        right: 0;
-        margin-left: auto;
-        margin-right: auto;
-        top: 0;
-        width: 80mm;
-        /* Standard Thermal Width */
-        height: auto;
-        background: white !important;
-        padding: 0;
-        margin-top: 0;
-        margin-bottom: 0;
+    #receipt-modal *,
+    #receipt-content,
+    #receipt-content * {
         display: block !important;
-        box-shadow: none !important;
+        visibility: visible !important;
     }
 
-    #receipt-modal>div {
-        box-shadow: none !important;
-        border: none !important;
+    /* Reset modal for print */
+    #receipt-modal {
+        position: static !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        background: white !important;
         width: 100% !important;
-        max-width: none !important;
+        height: auto !important;
+        padding: 0 !important;
         margin: 0 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
     }
 
-    /* Thermal Optimization: Remove backgrounds, use borders */
+    /* The receipt card itself */
+    #receipt-modal>div:first-child {
+        width: 80mm !important;
+        /* Standard thermal width, but also looks good on A5 */
+        max-width: 80mm !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: white !important;
+    }
+
+    /* Thermal/B&W Optimization */
+    #receipt-content {
+        padding: 4mm !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    /* Force high contrast for thermal printers */
     .bg-gray-900,
     .bg-gray-50\/50,
     .bg-primary {
-        background-color: white !important;
+        background-color: transparent !important;
         color: black !important;
-        border: 1pt solid black !important;
+        border: 1.5pt solid black !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
 
-    .text-white {
-        color: black !important;
-    }
-
-    .text-primary {
+    .text-white,
+    .text-primary,
+    .text-gray-400,
+    .text-gray-500 {
         color: black !important;
     }
 
     .border-dashed {
         border-style: dashed !important;
         border-color: black !important;
+        border-width: 1pt !important;
     }
 
-    #receipt-modal button {
+    /* Hide buttons and unnecessary elements */
+    #receipt-modal button,
+    [data-lucide="award"],
+    .lucide-award {
         display: none !important;
     }
 
-    #receipt-content {
-        max-height: none !important;
-        overflow: visible !important;
-        padding: 5mm !important;
-    }
-
-    /* Force all text to black for thermal clarity */
+    /* Force all text to black */
     * {
         color: black !important;
         text-shadow: none !important;
@@ -168,9 +179,9 @@
         print-color-adjust: exact;
     }
 
-    /* Hide decorative elements that might dither poorly on thermal */
-    [data-lucide="award"],
-    .lucide-award {
-        display: none !important;
+    /* Remove animations during print */
+    .animate-fade-in {
+        animation: none !important;
+        transform: none !important;
     }
 }

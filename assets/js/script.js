@@ -206,7 +206,7 @@ function placeOrder() {
         <div class="text-center mb-4 border-b border-dashed border-gray-200 pb-4">
             <div class="flex items-center justify-center gap-2 mb-1">
                 <div class="bg-primary text-white w-7 h-7 rounded-lg flex items-center justify-center">
-                    <i data-lucide="utensils-cross-over" class="w-4 h-4"></i>
+                    <i data-lucide="utensils" class="w-4 h-4"></i>
                 </div>
                 <span class="text-lg font-black tracking-tighter uppercase text-gray-800">BERKLEY</span>
             </div>
