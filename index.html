@@ -205,9 +205,11 @@
                         <i data-lucide="sliders-horizontal" class="text-gray-600 w-4"></i>
                     </button>
                     <button
-                        class="lg:hidden bg-primary-light text-primary w-8 h-8 rounded-lg flex items-center justify-center shadow-sm"
+                        class="lg:hidden bg-primary-light text-primary w-8 h-8 rounded-lg flex items-center justify-center shadow-sm relative"
                         onclick="toggleCart()">
                         <i data-lucide="shopping-cart" class="w-4"></i>
+                        <span id="cart-badge"
+                            class="absolute -top-1.5 -right-1.5 bg-rose-500 text-white text-[8px] font-black w-4 h-4 rounded-full flex items-center justify-center border-2 border-white hidden">0</span>
                     </button>
                 </div>
             </header>

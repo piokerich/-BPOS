@@ -430,8 +430,16 @@ function updateCartUI() {
     `).join('');
 
     const subTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     const tax = subTotal * 0.16; // 16% VAT
     const total = subTotal + tax;
+
+    // Update Mobile Badge
+    const badge = document.getElementById('cart-badge');
+    if (badge) {
+        badge.innerText = totalItems;
+        badge.classList.toggle('hidden', totalItems === 0);
+    }
 
     if (document.getElementById('sub-total')) document.getElementById('sub-total').innerText = `KSh ${subTotal.toLocaleString()}`;
     if (document.getElementById('tax-amount')) document.getElementById('tax-amount').innerText = `KSh ${tax.toLocaleString()}`;

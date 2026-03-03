@@ -1,4 +1,4 @@
-# Berkley POS - Hotel Management System
+# -BPOS - Hotel Management System
 
 A premium, modern Point of Sale (POS) system designed for Kenyan restaurants and hotels. Featuring a high-end glassmorphism UI, interactive ordering, and print-optimized receipts.
 
