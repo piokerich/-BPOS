@@ -1,0 +1,176 @@
+/* Base Overrides */
+:root {
+    --primary: #11a54b;
+    --primary-light: #e8f7ee;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Standardized Product Images (Robust Aspect Ratio) */
+.product-image-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%;
+    /* 4:3 Aspect Ratio */
+    overflow: hidden;
+    background-color: #f3f4f6;
+    /* bg-gray-100 */
+}
+
+.product-image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Category Bar Scroll Refinements */
+#category-bar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+#category-bar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Interactive Feedback */
+.group:hover .group-hover\:scale-110 {
+    transform: scale(1.1);
+}
+
+/* Custom Scrollbar for Cart (Subtle) */
+#cart-items::-webkit-scrollbar,
+#receipt-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+#cart-items::-webkit-scrollbar-track,
+#receipt-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#cart-items::-webkit-scrollbar-thumb,
+#receipt-content::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+/* Glassmorphism utility */
+.glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Print Styles */
+@page {
+    size: 80mm auto;
+    /* Standard Thermal Roll Size */
+    margin: 0;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #receipt-modal,
+    #receipt-modal * {
+        visibility: visible;
+    }
+
+    #receipt-modal {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        top: 0;
+        width: 80mm;
+        /* Standard Thermal Width */
+        height: auto;
+        background: white !important;
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        display: block !important;
+        box-shadow: none !important;
+    }
+
+    #receipt-modal>div {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+    }
+
+    /* Thermal Optimization: Remove backgrounds, use borders */
+    .bg-gray-900,
+    .bg-gray-50\/50,
+    .bg-primary {
+        background-color: white !important;
+        color: black !important;
+        border: 1pt solid black !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .text-white {
+        color: black !important;
+    }
+
+    .text-primary {
+        color: black !important;
+    }
+
+    .border-dashed {
+        border-style: dashed !important;
+        border-color: black !important;
+    }
+
+    #receipt-modal button {
+        display: none !important;
+    }
+
+    #receipt-content {
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 5mm !important;
+    }
+
+    /* Force all text to black for thermal clarity */
+    * {
+        color: black !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Hide decorative elements that might dither poorly on thermal */
+    [data-lucide="award"],
+    .lucide-award {
+        display: none !important;
+    }
+}
