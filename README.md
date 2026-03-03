@@ -3,8 +3,7 @@
 A premium, modern Point of Sale (POS) system designed for Kenyan restaurants and hotels. Featuring a high-end glassmorphism UI, interactive ordering, and print-optimized receipts.
 
 ## 🚀 Live Demo
-- **GitHub Pages**: [https://piokerich.github.io/berkleypos/](https://piokerich.github.io/berkleypos/)
-- **Netlify**: Access via your custom Netlify URL.
+Access your live POS via your custom Netlify URL after deployment.
 
 ## ✨ Key Features
 - **Kenyan Menu**: Pre-loaded with authentic dishes like Nyama Choma, Pilau, and Ugali.
@@ -25,10 +24,7 @@ A premium, modern Point of Sale (POS) system designed for Kenyan restaurants and
 
 ## 📦 Deployment
 
-### GitHub Pages
-Any changes pushed to the `main` branch are automatically deployed.
-
-### Netlify
+### Netlify (Recommended)
 1. **Drag & Drop**: Simply drag the project folder onto the [Netlify Drop](https://app.netlify.com/drop) page.
 2. **Git Integration**: Connect your GitHub repository to Netlify for automatic deployments.
 
