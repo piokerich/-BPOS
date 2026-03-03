@@ -50,6 +50,7 @@ let cart = [];
 let currentCategory = 'all';
 let currentOrderMode = 'DINE IN';
 let currentPaymentMode = 'CASH';
+let searchQuery = '';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -58,6 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCategories();
     renderProducts();
     updateCartUI();
+
+    // Search Listener
+    const searchInput = document.getElementById('menu-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            renderProducts();
+        });
+    }
 
     // Responsive initial state
     if (window.innerWidth >= 1025) {
@@ -332,9 +342,27 @@ function renderProducts() {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
 
-    const filteredProducts = currentCategory === 'all'
-        ? products
-        : products.filter(p => p.category === currentCategory);
+    // Filter by category AND search query
+    const filteredProducts = products.filter(p => {
+        const matchesCategory = currentCategory === 'all' || p.category === currentCategory;
+        const productName = p.name.toLowerCase();
+        const categoryName = categories.find(c => c.id === p.category)?.name.toLowerCase() || '';
+        const matchesSearch = productName.includes(searchQuery) || categoryName.includes(searchQuery);
+
+        return matchesCategory && matchesSearch;
+    });
+
+    if (filteredProducts.length === 0) {
+        grid.innerHTML = `
+            <div class="col-span-full py-20 text-center">
+                <i data-lucide="search-x" class="w-12 h-12 text-gray-200 mx-auto mb-4"></i>
+                <p class="text-gray-400 font-bold uppercase tracking-widest text-[10px]">No dishes found</p>
+                <p class="text-gray-300 text-xs mt-1">Try searching for something else</p>
+            </div>
+        `;
+        lucide.createIcons();
+        return;
+    }
 
     grid.innerHTML = filteredProducts.map(product => {
         const cartItem = cart.find(item => item.id === product.id);
